@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Evennia Russian Translation v0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-28 18:07+0000\n"
-"PO-Revision-Date: 2026-05-28 23:08+0500\n"
+"POT-Creation-Date: 2026-05-28 18:49+0000\n"
+"PO-Revision-Date: 2026-05-28 23:53+0500\n"
 "Last-Translator: gaurnar\n"
 "Language-Team: Russian (Russia)\n"
 "Language: ru_RU\n"
@@ -328,6 +328,123 @@ msgstr "нестандартное слияние {mergetype} для набор�
 #: commands/cmdsethandler.py:458
 msgid "Only CmdSets can be added to the cmdsethandler!"
 msgstr "В обработчик наборов команд можно добавлять только объекты CmdSet!"
+
+#: commands/default/building.py:1168
+msgctxt "help"
+msgid "Building"
+msgstr "Билдерство"
+
+#: commands/default/building.py:1174 commands/default/building.py:1178
+msgctxt "direction"
+msgid "n"
+msgstr "с"
+
+#: commands/default/building.py:1174
+msgid "north"
+msgstr "cевер"
+
+#: commands/default/building.py:1174 commands/default/building.py:1178
+msgctxt "direction"
+msgid "s"
+msgstr "ю"
+
+#: commands/default/building.py:1175 commands/default/building.py:1179
+msgctxt "direction"
+msgid "ne"
+msgstr "св"
+
+#: commands/default/building.py:1175
+msgid "northeast"
+msgstr "северо-восток"
+
+#: commands/default/building.py:1175 commands/default/building.py:1179
+msgctxt "direction"
+msgid "sw"
+msgstr "юз"
+
+#: commands/default/building.py:1176 commands/default/building.py:1180
+msgctxt "direction"
+msgid "e"
+msgstr "в"
+
+#: commands/default/building.py:1176
+msgid "east"
+msgstr "восток"
+
+#: commands/default/building.py:1176 commands/default/building.py:1180
+msgctxt "direction"
+msgid "w"
+msgstr "з"
+
+#: commands/default/building.py:1177 commands/default/building.py:1181
+msgctxt "direction"
+msgid "se"
+msgstr "юв"
+
+#: commands/default/building.py:1177
+msgid "southeast"
+msgstr "юго-восток"
+
+#: commands/default/building.py:1177 commands/default/building.py:1181
+msgctxt "direction"
+msgid "nw"
+msgstr "сз"
+
+#: commands/default/building.py:1178
+msgid "south"
+msgstr "юг"
+
+#: commands/default/building.py:1179
+msgid "southwest"
+msgstr "юго-запад"
+
+#: commands/default/building.py:1180
+msgid "west"
+msgstr "запад"
+
+#: commands/default/building.py:1181
+msgid "northwest"
+msgstr "северо-запад"
+
+#: commands/default/building.py:1182 commands/default/building.py:1183
+msgctxt "direction"
+msgid "u"
+msgstr "вв"
+
+#: commands/default/building.py:1182
+msgid "up"
+msgstr "вверх"
+
+#: commands/default/building.py:1182 commands/default/building.py:1183
+msgctxt "direction"
+msgid "d"
+msgstr "вн"
+
+#: commands/default/building.py:1183
+msgid "down"
+msgstr "вниз"
+
+#: commands/default/building.py:1184 commands/default/building.py:1185
+msgctxt "direction"
+msgid "i"
+msgstr "вр"
+
+#: commands/default/building.py:1184
+msgid "in"
+msgstr "внутрь"
+
+#: commands/default/building.py:1184 commands/default/building.py:1185
+msgctxt "direction"
+msgid "o"
+msgstr "нр"
+
+#: commands/default/building.py:1185
+msgid "out"
+msgstr "наружу"
+
+#: commands/default/building.py:1223
+msgid "Some place"
+msgstr "Какое-то место"
 
 #: commands/default/system.py:82
 #, python-format

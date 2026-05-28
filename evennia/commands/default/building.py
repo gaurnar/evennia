@@ -9,6 +9,8 @@ import evennia
 from django.conf import settings
 from django.core.paginator import Paginator
 from django.db.models import Max, Min, Q
+from django.utils.translation import gettext as _
+from django.utils.translation import pgettext
 from evennia import InterruptCommand
 from evennia.commands.cmdhandler import generate_cmdset_providers, get_and_merge_cmdsets
 from evennia.locks.lockhandler import LockException
@@ -1163,24 +1165,24 @@ class CmdTunnel(COMMAND_DEFAULT_CLASS):
     aliases = ["@tun"]
     switch_options = ("oneway", "tel")
     locks = "cmd: perm(tunnel) or perm(Builder)"
-    help_category = "Building"
+    help_category = pgettext("help", "Building")
 
     method_type = "cmd_tunnel"
 
     # store the direction, full name and its opposite
     directions = {
-        "n": ("north", "s"),
-        "ne": ("northeast", "sw"),
-        "e": ("east", "w"),
-        "se": ("southeast", "nw"),
-        "s": ("south", "n"),
-        "sw": ("southwest", "ne"),
-        "w": ("west", "e"),
-        "nw": ("northwest", "se"),
-        "u": ("up", "d"),
-        "d": ("down", "u"),
-        "i": ("in", "o"),
-        "o": ("out", "i"),
+        pgettext("direction", "n"): (_("north"), pgettext("direction", "s")),
+        pgettext("direction", "ne"): (_("northeast"), pgettext("direction", "sw")),
+        pgettext("direction", "e"): (_("east"), pgettext("direction", "w")),
+        pgettext("direction", "se"): (_("southeast"), pgettext("direction", "nw")),
+        pgettext("direction", "s"): (_("south"), pgettext("direction", "n")),
+        pgettext("direction", "sw"): (_("southwest"), pgettext("direction", "ne")),
+        pgettext("direction", "w"): (_("west"), pgettext("direction", "e")),
+        pgettext("direction", "nw"): (_("northwest"), pgettext("direction", "se")),
+        pgettext("direction", "u"): (_("up"), pgettext("direction", "d")),
+        pgettext("direction", "d"): (_("down"), pgettext("direction", "u")),
+        pgettext("direction", "i"): (_("in"), pgettext("direction", "o")),
+        pgettext("direction", "o"): (_("out"), pgettext("direction", "i")),
     }
 
     def func(self):
@@ -1218,7 +1220,7 @@ class CmdTunnel(COMMAND_DEFAULT_CLASS):
             exitshort += exit_typeclass
             backshort += exit_typeclass
 
-        roomname = "Some place"
+        roomname = _("Some place")
         if self.rhs:
             roomname = self.rhs  # this may include aliases; that's fine.
 
