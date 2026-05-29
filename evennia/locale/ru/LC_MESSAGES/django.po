@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Evennia Russian Translation v0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-28 18:49+0000\n"
-"PO-Revision-Date: 2026-05-28 23:53+0500\n"
+"POT-Creation-Date: 2026-05-29 07:44+0000\n"
+"PO-Revision-Date: 2026-05-29 12:44+0500\n"
 "Last-Translator: gaurnar\n"
 "Language-Team: Russian (Russia)\n"
 "Language: ru_RU\n"
@@ -445,6 +445,108 @@ msgstr "наружу"
 #: commands/default/building.py:1223
 msgid "Some place"
 msgstr "Какое-то место"
+
+#: commands/default/help.py:68
+msgid "help"
+msgstr "справка"
+
+#: commands/default/help.py:101
+msgid ""
+"\n"
+"            Get help.\n"
+"\n"
+"            Usage:\n"
+"                help\n"
+"                help <topic, command or category>\n"
+"                help <topic>/<subtopic>\n"
+"                help <topic>/<subtopic>/<subsubtopic> ...\n"
+"\n"
+"            Use the 'help' command alone to see an index of all help topics, "
+"organized\n"
+"            by category. Some big topics may offer additional sub-topics.\n"
+"\n"
+"            "
+msgstr ""
+"\n"
+"            Получить справку.\n"
+"\n"
+"            Использование:\n"
+"                справка\n"
+"                справка <тема, команда или категория>\n"
+"                справка <тема>/<под-тема>\n"
+"                справка <тема>/<под-тема>/<под-тема> ...\n"
+"\n"
+"            Чтобы получить предметный указатель всех тем (организованный по "
+"категориям), используйте команду 'справка' без параметров.\n"
+"            Некоторые большие темы могут иметь под-темы.\n"
+"\n"
+"            "
+
+#: commands/default/help.py:176
+#, python-brace-format
+msgid "|CHelp for |w{}|n"
+msgstr "|CСправка по |w{}|n"
+
+#: commands/default/help.py:176
+msgid "|rNo help found|n"
+msgstr "|rСправка не найдена|n"
+
+#: commands/default/help.py:179
+#, python-brace-format
+msgid " |C(aliases: {}|C)|n"
+msgstr " |C(алиасы: {}|C)|n"
+
+#: commands/default/help.py:192
+#, python-brace-format
+msgid ""
+"\n"
+"|CSubtopics:|n\n"
+"  {}"
+msgstr ""
+"\n"
+"|CПод-темы:|n\n"
+"  {}"
+
+#: commands/default/help.py:208
+#, python-brace-format
+msgid ""
+"\n"
+"|COther topic suggestions:|n\n"
+"{}"
+msgstr ""
+"\n"
+"|CДругие рекомендованные темы:|n\n"
+"{}"
+
+#: commands/default/help.py:303
+msgid "Commands"
+msgstr "Команды"
+
+#: commands/default/help.py:320
+msgid "Game & World"
+msgstr "Игра и Мир"
+
+#: commands/default/help.py:646
+#, python-brace-format
+msgid "There is no help topic matching '{query}'."
+msgstr "Нет справки по '{query}'."
+
+#: commands/default/help.py:666
+msgid ""
+"\n"
+"... But matches were found within the help texts of the suggestions below."
+msgstr ""
+"\n"
+"... Но найдены совпадения в следующих рекомендованных темах."
+
+#: commands/default/help.py:753
+#, python-brace-format
+msgid "No help entry found for '{}'"
+msgstr "Не найдена справка по '{}'"
+
+#: commands/default/help.py:880
+msgid "Building"
+msgstr "Билдерство"
 
 #: commands/default/system.py:82
 #, python-format

@@ -13,6 +13,7 @@ from dataclasses import dataclass
 from itertools import chain
 
 from django.conf import settings
+from django.utils.translation import gettext as _
 
 from evennia.help.filehelp import FILE_HELP_ENTRIES
 from evennia.help.models import HelpEntry
@@ -64,21 +65,7 @@ class HelpCategory:
 
 
 class CmdHelp(COMMAND_DEFAULT_CLASS):
-    """
-    Get help.
-
-    Usage:
-      help
-      help <topic, command or category>
-      help <topic>/<subtopic>
-      help <topic>/<subtopic>/<subsubtopic> ...
-
-    Use the 'help' command alone to see an index of all help topics, organized
-    by category. Some big topics may offer additional sub-topics.
-
-    """
-
-    key = "help"
+    key = _("help")
     aliases = ["?"]
     locks = "cmd:all()"
     arg_regex = r"\s|$"
@@ -108,6 +95,23 @@ class CmdHelp(COMMAND_DEFAULT_CLASS):
 
     # should topics disply their help entry when clicked
     clickable_topics = HELP_CLICKABLE_TOPICS
+
+    def get_help(self, caller, cmdset):
+        return _(
+            """
+            Get help.
+
+            Usage:
+                help
+                help <topic, command or category>
+                help <topic>/<subtopic>
+                help <topic>/<subtopic>/<subsubtopic> ...
+
+            Use the 'help' command alone to see an index of all help topics, organized
+            by category. Some big topics may offer additional sub-topics.
+
+            """
+        )
 
     def msg_help(self, text, **kwargs):
         """
@@ -169,10 +173,10 @@ class CmdHelp(COMMAND_DEFAULT_CLASS):
         separator = "|C" + "-" * self.client_width() + "|n"
         start = f"{separator}\n"
 
-        title = f"|CHelp for |w{topic}|n" if topic else "|rNo help found|n"
+        title = _("|CHelp for |w{}|n").format(topic) if topic else _("|rNo help found|n")
 
         if aliases:
-            aliases = " |C(aliases: {}|C)|n".format("|C,|n ".join(f"|w{ali}|n" for ali in aliases))
+            aliases = _(" |C(aliases: {}|C)|n").format("|C,|n ".join(f"|w{ali}|n" for ali in aliases))
         else:
             aliases = ""
 
@@ -185,7 +189,7 @@ class CmdHelp(COMMAND_DEFAULT_CLASS):
                 ]
             else:
                 subtopics = [f"|w{topic}/{subtop}|n" for subtop in subtopics]
-            subtopics = "\n|CSubtopics:|n\n  {}".format(
+            subtopics = _("\n|CSubtopics:|n\n  {}").format(
                 "\n  ".join(
                     format_grid(
                         subtopics, width=self.client_width(), line_prefix=self.index_topic_clr
@@ -201,7 +205,7 @@ class CmdHelp(COMMAND_DEFAULT_CLASS):
                 suggested = [f"|lchelp {sug}|lt|w{sug}|n|le" for sug in suggested]
             else:
                 suggested = [f"|w{sug}|n" for sug in suggested]
-            suggested = "\n|COther topic suggestions:|n\n{}".format(
+            suggested = _("\n|COther topic suggestions:|n\n{}").format(
                 "\n  ".join(
                     format_grid(
                         suggested, width=self.client_width(), line_prefix=self.index_topic_clr
@@ -296,7 +300,7 @@ class CmdHelp(COMMAND_DEFAULT_CLASS):
             # get the command-help entries by-category
             sep1 = (
                 self.index_type_separator_clr
-                + pad("Commands", width=width, fillchar="-")
+                + pad(_("Commands"), width=width, fillchar="-")
                 + self.index_topic_clr
             )
             grid, verbatim_elements = _group_by_category(cmd_help_dict)
@@ -313,7 +317,7 @@ class CmdHelp(COMMAND_DEFAULT_CLASS):
             # get db-based help entries by-category
             sep2 = (
                 self.index_type_separator_clr
-                + pad("Game & World", width=width, fillchar="-")
+                + pad(_("Game & World"), width=width, fillchar="-")
                 + self.index_topic_clr
             )
             grid, verbatim_elements = _group_by_category(db_help_dict)
@@ -639,7 +643,7 @@ class CmdHelp(COMMAND_DEFAULT_CLASS):
 
         if not match:
             # no topic matches found. Only give suggestions.
-            help_text = f"There is no help topic matching '{query}'."
+            help_text = _("There is no help topic matching '{query}'.").format(query)
 
             if not suggestions:
                 # we don't even have a good suggestion. Run a second search,
@@ -658,10 +662,10 @@ class CmdHelp(COMMAND_DEFAULT_CLASS):
                         fields=search_fields,
                     )
                     if suggestions:
-                        help_text += (
+                        help_text += (_(
                             "\n... But matches were found within the help "
                             "texts of the suggestions below."
-                        )
+                        ))
                         suggestions = [
                             self.strip_cmd_prefix(sugg, key_and_aliases) for sugg in suggestions
                         ]
@@ -746,7 +750,7 @@ class CmdHelp(COMMAND_DEFAULT_CLASS):
                         checked_topic = topic + f"{self.subtopic_separator_char}{subtopic_query}"
                         output = self.format_help_entry(
                             topic=topic,
-                            help_text=f"No help entry found for '{checked_topic}'",
+                            help_text=_("No help entry found for '{}'").format(checked_topic),
                             subtopics=subtopic_index,
                             click_topics=clickable_topics,
                         )
@@ -873,7 +877,7 @@ class CmdSetHelp(CmdHelp):
     aliases = []
     switch_options = ("edit", "replace", "append", "extend", "category", "locks", "delete")
     locks = "cmd:perm(Helper)"
-    help_category = "Building"
+    help_category = _("Building")
     arg_regex = None
 
     def parse(self):
