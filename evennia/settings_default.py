@@ -1283,6 +1283,18 @@ except ImportError:
     # Django extensions are not installed in all distros.
     pass
 
+######################################################################
+# Internationalization
+######################################################################
+
+# Temporary solution for languages with complex verb conjugation (e.g. Russian)
+# TODO fix that
+NO_VERB_CONJUGATION = False
+
+# Temporary solution for languages not supported by inflect lib (e.g. Russian)
+# TODO fix that
+NO_PLURAL_TRANSFORMATION = False
+
 #######################################################################
 # SECRET_KEY
 #######################################################################

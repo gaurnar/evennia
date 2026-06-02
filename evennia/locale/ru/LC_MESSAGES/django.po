@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Evennia Russian Translation v0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-29 07:44+0000\n"
-"PO-Revision-Date: 2026-05-29 12:44+0500\n"
+"POT-Creation-Date: 2026-06-01 16:54+0000\n"
+"PO-Revision-Date: 2026-06-02 17:49+0500\n"
 "Last-Translator: gaurnar\n"
 "Language-Team: Russian (Russia)\n"
 "Language: ru_RU\n"
@@ -446,6 +446,525 @@ msgstr "наружу"
 msgid "Some place"
 msgstr "Какое-то место"
 
+#: commands/default/general.py:35
+msgid "home"
+msgstr "домой"
+
+#: commands/default/general.py:41
+msgid ""
+"\n"
+"            move to your character's home location\n"
+"\n"
+"            Usage:\n"
+"              home\n"
+"\n"
+"            Teleports you to your home location.\n"
+"            "
+msgstr ""
+"\n"
+"            переместиться в домашнюю локацию вашего персонажа\n"
+"\n"
+"            Использование:\n"
+"              домой\n"
+"\n"
+"            Телепортирует вас в вашу домашнюю локацию.\n"
+"            "
+
+#: commands/default/general.py:56
+msgid "You have no home!"
+msgstr "У вас нет домашней локации!"
+
+#: commands/default/general.py:58
+msgid "You are already home!"
+msgstr "Вы уже дома!"
+
+#: commands/default/general.py:60
+msgid "There's no place like home ..."
+msgstr "В гостях хорошо, а дома лучше…"
+
+#: commands/default/general.py:65
+msgid "look"
+msgstr "смотреть"
+
+#: commands/default/general.py:66
+msgid "l, ls"
+msgstr "см"
+
+#: commands/default/general.py:72
+msgid ""
+"\n"
+"            look at location or object\n"
+"\n"
+"            Usage:\n"
+"              look\n"
+"              look <obj>\n"
+"              look *<account>\n"
+"\n"
+"            Observes your location or objects in your vicinity.\n"
+"            "
+msgstr ""
+"\n"
+"            посмотреть на место или объект\n"
+"\n"
+"            Использование:\n"
+"              смотреть\n"
+"              смотреть <объект>\n"
+"              смотреть *<аккаунт>\n"
+"\n"
+"            Осмотреть место или объект в вашей досягаемости.\n"
+"            "
+
+#: commands/default/general.py:92
+msgid "You have no location to look at!"
+msgstr "Вам не на что смотреть!"
+
+#: commands/default/general.py:359
+msgid "inventory"
+msgstr "инвентарь"
+
+#: commands/default/general.py:360
+msgid "inv, i"
+msgstr "инв"
+
+#: commands/default/general.py:366
+msgid ""
+"\n"
+"            view inventory\n"
+"\n"
+"            Usage:\n"
+"              inventory\n"
+"              inv\n"
+"\n"
+"            Shows your inventory.\n"
+"            "
+msgstr ""
+"\n"
+"            посмотреть инвентарь\n"
+"\n"
+"            Использование:\n"
+"              инвентарь\n"
+"              инв\n"
+"\n"
+"            Показать ваш инвентарь.\n"
+"            "
+
+#: commands/default/general.py:381
+msgid "You are not carrying anything."
+msgstr "Вы ничего не несёте с собой."
+
+#: commands/default/general.py:391
+#, python-brace-format
+msgid ""
+"|wYou are carrying:\n"
+"{}"
+msgstr ""
+"|wВы несёте:\n"
+"{}"
+
+#: commands/default/general.py:434
+msgid "get"
+msgstr "взять"
+
+#: commands/default/general.py:435
+msgid "grab"
+msgstr "вз"
+
+#: commands/default/general.py:441
+msgid ""
+"\n"
+"            pick up something\n"
+"\n"
+"            Usage:\n"
+"              get <obj>\n"
+"\n"
+"            Picks up an object from your location and puts it in your "
+"inventory.\n"
+"            "
+msgstr ""
+"\n"
+"            подобрать что-то\n"
+"\n"
+"            Использование:\n"
+"              взять <объект>\n"
+"\n"
+"            Подобрать объект из вашей локации и поместить его в инвентарь.\n"
+"            "
+
+#: commands/default/general.py:457
+msgid "Get what?"
+msgstr "Что вы хотели взять?"
+
+#: commands/default/general.py:467
+msgid "You can't get yourself."
+msgstr "Вы не можете взять самого себя."
+
+#: commands/default/general.py:477
+msgid "You can't get that."
+msgstr "Вы не можете взять это."
+
+#: commands/default/general.py:493
+msgid "That can't be picked up."
+msgstr "Вы не можете подобрать это."
+
+#: commands/default/general.py:498
+#, python-brace-format
+msgid "You pick up {obj_name}."
+msgstr "Вы подбираете {obj_name}."
+
+#: commands/default/general.py:499
+#, python-brace-format
+msgid "{subj_name} picks up {obj_name}."
+msgstr "{subj_name} подбирает {obj_name}."
+
+#: commands/default/general.py:500
+#, python-brace-format
+msgid "$You() $conj(pick) up {obj_name}."
+msgstr "$You() $conj(подобрать) {obj_name}."
+
+#: commands/default/general.py:505
+msgid "drop"
+msgstr "выбросить"
+
+#: commands/default/general.py:511
+msgid ""
+"\n"
+"            drop something\n"
+"\n"
+"            Usage:\n"
+"              drop <obj>\n"
+"\n"
+"            Lets you drop an object from your inventory into the\n"
+"            location you are currently in.\n"
+"            "
+msgstr ""
+"\n"
+"            выбросить что-то\n"
+"\n"
+"            Использование:\n"
+"              выбросить <объект>\n"
+"\n"
+"            Выбросить объект из вашего инвентаря в текущую локацию.\n"
+"            "
+
+#: commands/default/general.py:527
+msgid "Drop what?"
+msgstr "Что вы хотите выбросить?"
+
+#: commands/default/general.py:535
+#, python-brace-format
+msgid "You aren't carrying {args}."
+msgstr "Вы не несёте {args}."
+
+#: commands/default/general.py:536
+#, python-brace-format
+msgid "You carry more than one {args}:"
+msgstr "Вы несёте более одного {args}:"
+
+#: commands/default/general.py:561
+msgid "That can't be dropped."
+msgstr "Вы не можете выбросить это."
+
+#: commands/default/general.py:566
+#, python-brace-format
+msgid "You drop {obj_name}."
+msgstr "Вы выбрасываете {obj_name}."
+
+#: commands/default/general.py:567
+#, python-brace-format
+msgid "{subj_name} drops {obj_name}."
+msgstr "{subj_name} выбрасывает {obj_name}."
+
+#: commands/default/general.py:568
+#, python-brace-format
+msgid "$You() $conj(drop) {obj_name}."
+msgstr "$You() $conj(выбрасывать) {obj_name}."
+
+#: commands/default/general.py:573
+msgid "give"
+msgstr "дать"
+
+#: commands/default/general.py:574
+msgid "=, to "
+msgstr " "
+
+#: commands/default/general.py:580
+msgid ""
+"\n"
+"            give away something to someone\n"
+"\n"
+"            Usage:\n"
+"              give <inventory obj> <to||=> <target>\n"
+"\n"
+"            Gives an item from your inventory to another person,\n"
+"            placing it in their inventory.\n"
+"            "
+msgstr ""
+"\n"
+"            дать кому-то что-то\n"
+"\n"
+"            Использование:\n"
+"              дать <объект в инвентаре> <цель>\n"
+"\n"
+"            Дать объект из вашего инвентаря кому-то, помещая этот объект в "
+"его инвентарь.\n"
+"            "
+
+#: commands/default/general.py:596
+msgid "Usage: give <inventory object> = <target>"
+msgstr "Использование: дать <объект из инвентаря> <цель>"
+
+#: commands/default/general.py:602
+#, python-brace-format
+msgid "You aren't carrying {lhs}."
+msgstr "Вы не несёте {lhs}."
+
+#: commands/default/general.py:603
+#, python-brace-format
+msgid "You carry more than one {lhs}:"
+msgstr "Вы несёте более одного {lhs}:"
+
+#: commands/default/general.py:620
+#, python-brace-format
+msgid "You keep {item} to yourself."
+msgstr "Вы оставляете {item} у себя."
+
+#: commands/default/general.py:642
+#, python-brace-format
+msgid "You could not give that to {name}."
+msgstr "Вы не можете дать это {name}."
+
+#: commands/default/general.py:649
+#, python-brace-format
+msgid "You give {obj_name} to {name}."
+msgstr "Вы даёте {obj_name} {name}."
+
+#: commands/default/general.py:654
+#, python-brace-format
+msgid "{name} gives you {obj_name}."
+msgstr "{name} даёт вам {obj_name}."
+
+#: commands/default/general.py:661
+msgid "setdesc"
+msgstr "описание"
+
+#: commands/default/general.py:667
+msgid ""
+"\n"
+"            describe yourself\n"
+"\n"
+"            Usage:\n"
+"              setdesc <description>\n"
+"\n"
+"            Add a description to yourself. This\n"
+"            will be visible to people when they\n"
+"            look at you.\n"
+"            "
+msgstr ""
+"\n"
+"            описать себя\n"
+"\n"
+"            Использование:\n"
+"              описание <description>\n"
+"\n"
+"            Добавить описание себя. Оно будет видно другим игрокам.\n"
+"            "
+
+#: commands/default/general.py:683
+msgid "You must add a description."
+msgstr "Вы должны задать описание."
+
+#: commands/default/general.py:687
+msgid "You set your description."
+msgstr "Вы задаёте своё описание."
+
+#: commands/default/general.py:691
+msgid "say"
+msgstr "говорить"
+
+#: commands/default/general.py:692
+msgid "\", '"
+msgstr "\", ‘, сказать, г"
+
+#: commands/default/general.py:700
+msgid ""
+"\n"
+"            speak as your character\n"
+"\n"
+"            Usage:\n"
+"              say <message>\n"
+"\n"
+"            Talk to those in your current location.\n"
+"            "
+msgstr ""
+"\n"
+"            сказать что-то от лица своего персонажа\n"
+"\n"
+"            Использование:\n"
+"              говорить <сообщение>\n"
+"              сказать <сообщение>\n"
+"              г <сообщение>\n"
+"\n"
+"            Сказать что-то игрокам в текущей локации.\n"
+"            "
+
+#: commands/default/general.py:716
+msgid "Say what?"
+msgstr "Сказать что?"
+
+#: commands/default/general.py:733
+msgid "whisper"
+msgstr "шептать"
+
+#: commands/default/general.py:738
+msgid ""
+"\n"
+"            Speak privately as your character to another\n"
+"\n"
+"            Usage:\n"
+"              whisper <character> = <message>\n"
+"              whisper <char1>, <char2> = <message>\n"
+"\n"
+"            Talk privately to one or more characters in your current "
+"location, without\n"
+"            others in the room being informed.\n"
+"            "
+msgstr ""
+"\n"
+"            Приватно поговорить с другим персонажем\n"
+"\n"
+"            Использование:\n"
+"              шептать <персонаж> = <сообщение>\n"
+"              шептать <персонаж 1>, <персонаж 2> = <сообщение>\n"
+"\n"
+"            Приватно сказать что-то одному или нескольким персонажам в вашей "
+"текущей локации (другие персонажи в комнате вас не услышат).\n"
+"            "
+
+#: commands/default/general.py:756
+msgid "Usage: whisper <character> = <message>"
+msgstr "Использование: шептать <персонаж> = <сообщение>"
+
+#: commands/default/general.py:778
+msgid "pose"
+msgstr "поза"
+
+#: commands/default/general.py:779
+msgid ":, emote"
+msgstr ":"
+
+#: commands/default/general.py:789
+msgid ""
+"\n"
+"            strike a pose\n"
+"\n"
+"            Usage:\n"
+"              pose <pose text>\n"
+"              pose's <pose text>\n"
+"\n"
+"            Example:\n"
+"              pose is standing by the wall, smiling.\n"
+"               -> others will see:\n"
+"              Tom is standing by the wall, smiling.\n"
+"\n"
+"            Describe an action being taken. The pose text will\n"
+"            automatically begin with your name.\n"
+"            "
+msgstr ""
+"\n"
+"            позировать\n"
+"\n"
+"            Использование:\n"
+"              поза <текст>\n"
+"              : <текст>\n"
+"\n"
+"            Пример:\n"
+"              поза стоит у стены, улыбаясь.\n"
+"               -> Другие увидят:\n"
+"              Том стоит у стены, улыбаясь.\n"
+"\n"
+"            Опишите действие, которое хотите совершить. Сообщение будет "
+"начинаться с вашего имени.\n"
+"            "
+
+#: commands/default/general.py:822
+msgid "What do you want to do?"
+msgstr "Что вы хотите сделать?"
+
+#: commands/default/general.py:830
+msgid "access"
+msgstr "доступ"
+
+#: commands/default/general.py:831
+msgid "groups, hierarchy"
+msgstr "группы, иерархия"
+
+#: commands/default/general.py:837
+msgid ""
+"\n"
+"            show your current game access\n"
+"\n"
+"            Usage:\n"
+"              access\n"
+"\n"
+"            This command shows you the permission hierarchy and\n"
+"            which permission groups you are a member of.\n"
+"            "
+msgstr ""
+"\n"
+"            показать ваши текущий доступ в игре\n"
+"\n"
+"            Использование:\n"
+"              доступ\n"
+"\n"
+"            Эта команда показывает иерархию доступа и в каких группах "
+"доступа вы состоите.\n"
+"            "
+
+#: commands/default/general.py:853
+#, python-brace-format
+msgid ""
+"\n"
+"|wPermission Hierarchy|n (climbing):\n"
+" {hierarchy}"
+msgstr ""
+"\n"
+"|wИерархия доступа|n (по возрастанию):\n"
+" {hierarchy}"
+
+#: commands/default/general.py:858 commands/default/general.py:859
+msgid "<Superuser>"
+msgstr "<Суперпользователь>"
+
+#: commands/default/general.py:865
+msgid "<No account>"
+msgstr "<Нет аккаунта>"
+
+#: commands/default/general.py:867
+msgid ""
+"\n"
+"|wYour access|n:"
+msgstr ""
+"\n"
+"|wВаши доступы|n:"
+
+#: commands/default/general.py:868
+#, python-brace-format
+msgid ""
+"\n"
+"Character |c{key}|n: {cperms}"
+msgstr ""
+"\n"
+"Персонаж |c{key}|n: {cperms}"
+
+#: commands/default/general.py:870
+#, python-brace-format
+msgid ""
+"\n"
+"Account |c{key}|n: {pperms}"
+msgstr ""
+"\n"
+"Аккаунт |c{key}|n: {pperms}"
+
 #: commands/default/help.py:68
 msgid "help"
 msgstr "справка"
@@ -743,105 +1262,105 @@ msgstr "Это место не должно существовать... Свяж
 msgid "Your character {key} has been destroyed."
 msgstr "Ваш персонаж {key} был удалён."
 
-#: objects/objects.py:1796 objects/objects.py:1815 objects/objects.py:1844
+#: objects/objects.py:1800 objects/objects.py:1819 objects/objects.py:1848
 msgid ", and"
 msgstr " и"
 
-#: objects/objects.py:1797
+#: objects/objects.py:1801
 msgid "Exits"
 msgstr "Выходы"
 
-#: objects/objects.py:1817
+#: objects/objects.py:1821
 msgid "Characters"
 msgstr "Персонажи"
 
-#: objects/objects.py:1845
+#: objects/objects.py:1849
 msgid "You see"
 msgstr "Вы видите"
 
-#: objects/objects.py:2145
+#: objects/objects.py:2149
 #, python-brace-format
 msgid "You become |w{key}|n."
 msgstr "Вы теперь |w{key}|n."
 
-#: objects/objects.py:2324
+#: objects/objects.py:2328
 #, python-brace-format
 msgid "{object} is leaving {origin}, heading for {destination}."
 msgstr "{object}: переход из {origin}, направление — {destination}."
 
-#: objects/objects.py:2336 objects/objects.py:2409
+#: objects/objects.py:2340 objects/objects.py:2413
 msgid "somewhere"
 msgstr "где-то"
 
-#: objects/objects.py:2337 objects/objects.py:2338 objects/objects.py:2410
-#: objects/objects.py:2411
+#: objects/objects.py:2341 objects/objects.py:2342 objects/objects.py:2414
+#: objects/objects.py:2415
 msgid "nowhere"
 msgstr "нигде"
 
-#: objects/objects.py:2379
+#: objects/objects.py:2383
 #, python-brace-format
 msgid "You now have {name} in your possession."
 msgstr "Теперь у вас есть {name}."
 
-#: objects/objects.py:2389
+#: objects/objects.py:2393
 #, python-brace-format
 msgid "{object} arrives to {destination} from {origin}."
 msgstr "{object}: прибытие из {origin} в {destination}."
 
-#: objects/objects.py:2391
+#: objects/objects.py:2395
 #, python-brace-format
 msgid "{object} arrives to {destination}."
 msgstr "{object}: прибытие в {destination}."
 
-#: objects/objects.py:2675 objects/objects.py:2679
+#: objects/objects.py:2679 objects/objects.py:2683
 #, python-brace-format
 msgid "Could not view '{target_name}'."
 msgstr "Не удалось просмотреть '{target_name}'."
 
-#: objects/objects.py:2804
+#: objects/objects.py:2808
 #, python-brace-format
 msgid "You cannot drop {obj}"
 msgstr "Нельзя бросить: {obj}"
 
-#: objects/objects.py:2916
+#: objects/objects.py:2920
 #, python-brace-format
 msgid "{self} whisper to {all_receivers}, \"|n{speech}|n\""
 msgstr "{self} шепчет {all_receivers}: \"|n{speech}|n\""
 
-#: objects/objects.py:2920
+#: objects/objects.py:2924
 #, python-brace-format
 msgid "{object} whispers: \"|n{speech}|n\""
 msgstr "{object} шепчет: \"|n{speech}|n\""
 
-#: objects/objects.py:2923
+#: objects/objects.py:2927
 #, python-brace-format
 msgid "{self} say, \"|n{speech}|n\""
 msgstr "{self} говорит: \"|n{speech}|n\""
 
-#: objects/objects.py:2924
+#: objects/objects.py:2928
 #, python-brace-format
 msgid "{object} says, \"{speech}\""
 msgstr "{object} говорит: \"{speech}\""
 
-#: objects/objects.py:2933 objects/objects.py:2949 objects/objects.py:2976
+#: objects/objects.py:2937 objects/objects.py:2953 objects/objects.py:2980
 msgid "You"
 msgstr "Вы"
 
-#: objects/objects.py:3034
+#: objects/objects.py:3038
 msgid "This is a character."
 msgstr "Это персонаж."
 
-#: objects/objects.py:3201
+#: objects/objects.py:3205
 #, python-brace-format
 msgid "|rA character named '|w{name}|r' already exists.|n"
 msgstr "|rПерсонаж с именем '|w{name}|r' уже существует.|n"
 
-#: objects/objects.py:3258
+#: objects/objects.py:3262
 #, python-brace-format
 msgid "|r{obj} has no location and no home is set.|n"
 msgstr "|r{obj}: нет местоположения и не задан дом.|n"
 
-#: objects/objects.py:3277
+#: objects/objects.py:3281
 #, python-brace-format
 msgid ""
 "\n"
@@ -850,30 +1369,30 @@ msgstr ""
 "\n"
 "Вы теперь |c{name}|n.\n"
 
-#: objects/objects.py:3282
+#: objects/objects.py:3286
 #, python-brace-format
 msgid "{name} has entered the game."
 msgstr "{name}: вход в игру."
 
-#: objects/objects.py:3312
+#: objects/objects.py:3316
 #, python-brace-format
 msgid "{name} has left the game{reason}."
 msgstr "{name}: выход из игры ({reason})."
 
-#: objects/objects.py:3363
+#: objects/objects.py:3367
 msgid "This is a room."
 msgstr "Это комната."
 
-#: objects/objects.py:3505
+#: objects/objects.py:3509
 #, python-brace-format
 msgid " (exit to {destination})"
 msgstr " (выход в {destination})"
 
-#: objects/objects.py:3533
+#: objects/objects.py:3537
 msgid "This is an exit."
 msgstr "Это выход."
 
-#: objects/objects.py:3753
+#: objects/objects.py:3757
 msgid "You cannot go there."
 msgstr "Вы не можете туда пройти."
 
@@ -1644,9 +2163,6 @@ msgstr "У вас нет разрешения на просмотр или ре�
 #~ msgstr ""
 #~ "%s Если вы используете терминал, вы можете использовать фразу из "
 #~ "нескольких слов если возьмёте пароль в двойные скобки."
-
-#~ msgid "Say what?"
-#~ msgstr "Сказать что?"
 
 #~ msgid "Channel '%s' not found."
 #~ msgstr "Канал '%s' не обнаружен."

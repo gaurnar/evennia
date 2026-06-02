@@ -4,11 +4,13 @@ General Character commands usually available to all characters
 
 import re
 
+from django.utils.translation import gettext as _
 from django.conf import settings
 
 from evennia.objects.objects import DefaultObject
 from evennia.typeclasses.attributes import NickTemplateInvalid
 from evennia.utils import utils
+from evennia.utils.i18n import translated_list, send_action_message
 
 COMMAND_DEFAULT_CLASS = utils.class_from_module(settings.COMMAND_DEFAULT_CLASS)
 
@@ -30,48 +32,54 @@ __all__ = (
 
 
 class CmdHome(COMMAND_DEFAULT_CLASS):
-    """
-    move to your character's home location
-
-    Usage:
-      home
-
-    Teleports you to your home location.
-    """
-
-    key = "home"
+    key = _("home")
     locks = "cmd:perm(home) or perm(Builder)"
     arg_regex = r"$"
+
+    def get_help(self, caller, cmdset):
+        return _(
+            """
+            move to your character's home location
+
+            Usage:
+              home
+
+            Teleports you to your home location.
+            """
+        )
 
     def func(self):
         """Implement the command"""
         caller = self.caller
         home = caller.home
         if not home:
-            caller.msg("You have no home!")
+            caller.msg(_("You have no home!"))
         elif home == caller.location:
-            caller.msg("You are already home!")
+            caller.msg(_("You are already home!"))
         else:
-            caller.msg("There's no place like home ...")
+            caller.msg(_("There's no place like home ..."))
             caller.move_to(home, move_type="teleport")
 
 
 class CmdLook(COMMAND_DEFAULT_CLASS):
-    """
-    look at location or object
-
-    Usage:
-      look
-      look <obj>
-      look *<account>
-
-    Observes your location or objects in your vicinity.
-    """
-
-    key = "look"
-    aliases = ["l", "ls"]
+    key = _("look")
+    aliases = translated_list(_("l, ls"))
     locks = "cmd:all()"
     arg_regex = r"\s|$"
+
+    def get_help(self, caller, cmdset):
+        return _(
+            """
+            look at location or object
+
+            Usage:
+              look
+              look <obj>
+              look *<account>
+
+            Observes your location or objects in your vicinity.
+            """
+        )
 
     def func(self):
         """
@@ -81,7 +89,7 @@ class CmdLook(COMMAND_DEFAULT_CLASS):
         if not self.args:
             target = caller.location
             if not target:
-                caller.msg("You have no location to look at!")
+                caller.msg(_("You have no location to look at!"))
                 return
         else:
             target = caller.search(self.args)
@@ -348,26 +356,29 @@ class CmdNick(COMMAND_DEFAULT_CLASS):
 
 
 class CmdInventory(COMMAND_DEFAULT_CLASS):
-    """
-    view inventory
-
-    Usage:
-      inventory
-      inv
-
-    Shows your inventory.
-    """
-
-    key = "inventory"
-    aliases = ["inv", "i"]
+    key = _("inventory")
+    aliases = translated_list(_("inv, i"))
     locks = "cmd:all()"
     arg_regex = r"$"
+
+    def get_help(self, caller, cmdset):
+        return _(
+            """
+            view inventory
+
+            Usage:
+              inventory
+              inv
+
+            Shows your inventory.
+            """
+        )
 
     def func(self):
         """check inventory"""
         items = self.caller.contents
         if not items:
-            string = "You are not carrying anything."
+            string = _("You are not carrying anything.")
         else:
             from evennia.utils.ansi import raw as raw_ansi
 
@@ -377,7 +388,7 @@ class CmdInventory(COMMAND_DEFAULT_CLASS):
                     f"|C{key}|n",
                     "{}|n".format(utils.crop(raw_ansi(desc or ""), width=50) or ""),
                 )
-            string = f"|wYou are carrying:\n{table}"
+            string = _("|wYou are carrying:\n{}").format(table)
         self.msg(text=(string, {"type": "inventory"}))
 
 
@@ -420,19 +431,22 @@ class NumberedTargetCommand(COMMAND_DEFAULT_CLASS):
 
 
 class CmdGet(NumberedTargetCommand):
-    """
-    pick up something
-
-    Usage:
-      get <obj>
-
-    Picks up an object from your location and puts it in your inventory.
-    """
-
-    key = "get"
-    aliases = "grab"
+    key = _("get")
+    aliases = translated_list(_("grab"))
     locks = "cmd:all()"
     arg_regex = r"\s|$"
+
+    def get_help(self, caller, cmdset):
+        return _(
+            """
+            pick up something
+
+            Usage:
+              get <obj>
+
+            Picks up an object from your location and puts it in your inventory.
+            """
+        )
 
     def func(self):
         """implements the command."""
@@ -440,7 +454,7 @@ class CmdGet(NumberedTargetCommand):
         caller = self.caller
 
         if not self.args:
-            self.msg("Get what?")
+            self.msg(_("Get what?"))
             return
         objs = caller.search(self.args, location=caller.location, stacked=self.number)
         if not objs:
@@ -450,7 +464,7 @@ class CmdGet(NumberedTargetCommand):
         objs = utils.make_iter(objs)
 
         if len(objs) == 1 and caller == objs[0]:
-            self.msg("You can't get yourself.")
+            self.msg(_("You can't get yourself."))
             return
 
         # if we aren't allowed to get any of the objects, cancel the get
@@ -460,7 +474,7 @@ class CmdGet(NumberedTargetCommand):
                 if obj.db.get_err_msg:
                     self.msg(obj.db.get_err_msg)
                 else:
-                    self.msg("You can't get that.")
+                    self.msg(_("You can't get that."))
                 return
             # calling at_pre_get hook method
             if not obj.at_pre_get(caller):
@@ -476,33 +490,41 @@ class CmdGet(NumberedTargetCommand):
 
         if not moved:
             # none of the objects were successfully moved
-            self.msg("That can't be picked up.")
+            self.msg(_("That can't be picked up."))
         else:
-            obj_name = moved[0].get_numbered_name(len(moved), caller, return_string=True)
-            caller.location.msg_contents(f"$You() $conj(pick) up {obj_name}.", from_obj=caller)
+            send_action_message(
+                caller,
+                moved,
+                _("You pick up {obj_name}."),
+                _("{subj_name} picks up {obj_name}."),
+                _("$You() $conj(pick) up {obj_name}.")
+            )
 
 
 class CmdDrop(NumberedTargetCommand):
-    """
-    drop something
-
-    Usage:
-      drop <obj>
-
-    Lets you drop an object from your inventory into the
-    location you are currently in.
-    """
-
-    key = "drop"
+    key = _("drop")
     locks = "cmd:all()"
     arg_regex = r"\s|$"
+
+    def get_help(self, caller, cmdset):
+        return _(
+            """
+            drop something
+
+            Usage:
+              drop <obj>
+
+            Lets you drop an object from your inventory into the
+            location you are currently in.
+            """
+        )
 
     def func(self):
         """Implement command"""
 
         caller = self.caller
         if not self.args:
-            caller.msg("Drop what?")
+            caller.msg(_("Drop what?"))
             return
 
         # Because the DROP command by definition looks for items
@@ -510,8 +532,8 @@ class CmdDrop(NumberedTargetCommand):
         objs = caller.search(
             self.args,
             location=caller,
-            nofound_string=f"You aren't carrying {self.args}.",
-            multimatch_string=f"You carry more than one {self.args}:",
+            nofound_string=_("You aren't carrying {args}.").format(args=self.args),
+            multimatch_string=_("You carry more than one {args}:").format(args=self.args),
             stacked=self.number,
         )
         if not objs:
@@ -536,41 +558,49 @@ class CmdDrop(NumberedTargetCommand):
 
         if not moved:
             # none of the objects were successfully moved
-            self.msg("That can't be dropped.")
+            self.msg(_("That can't be dropped."))
         else:
-            obj_name = moved[0].get_numbered_name(len(moved), caller, return_string=True)
-            caller.location.msg_contents(f"$You() $conj(drop) {obj_name}.", from_obj=caller)
+            send_action_message(
+                caller,
+                moved,
+                _("You drop {obj_name}."),
+                _("{subj_name} drops {obj_name}."),
+                _("$You() $conj(drop) {obj_name}.")
+            )
 
 
 class CmdGive(NumberedTargetCommand):
-    """
-    give away something to someone
-
-    Usage:
-      give <inventory obj> <to||=> <target>
-
-    Gives an item from your inventory to another person,
-    placing it in their inventory.
-    """
-
-    key = "give"
-    rhs_split = ("=", " to ")  # Prefer = delimiter, but allow " to " usage.
+    key = _("give")
+    rhs_split = translated_list(_("=, to "), strip=False)  # Prefer = delimiter, but allow " to " usage.
     locks = "cmd:all()"
     arg_regex = r"\s|$"
+
+    def get_help(self, caller, cmdset):
+        return _(
+            """
+            give away something to someone
+
+            Usage:
+              give <inventory obj> <to||=> <target>
+
+            Gives an item from your inventory to another person,
+            placing it in their inventory.
+            """
+        )
 
     def func(self):
         """Implement give"""
 
         caller = self.caller
         if not self.args or not self.rhs:
-            caller.msg("Usage: give <inventory object> = <target>")
+            caller.msg(_("Usage: give <inventory object> = <target>"))
             return
         # find the thing(s) to give away
         to_give = caller.search(
             self.lhs,
             location=caller,
-            nofound_string=f"You aren't carrying {self.lhs}.",
-            multimatch_string=f"You carry more than one {self.lhs}:",
+            nofound_string=_("You aren't carrying {lhs}.").format(lhs=self.lhs),
+            multimatch_string=_("You carry more than one {lhs}:").format(lhs=self.lhs),
             stacked=self.number,
         )
         if not to_give:
@@ -586,7 +616,11 @@ class CmdGive(NumberedTargetCommand):
 
         singular, plural = to_give[0].get_numbered_name(len(to_give), caller)
         if target == caller:
-            caller.msg(f"You keep {plural if len(to_give) > 1 else singular} to yourself.")
+            caller.msg(
+                _("You keep {item} to yourself.").format(
+                    item=plural if len(to_give) > 1 else singular
+                )
+            )
             return
 
         # if any of the objects aren't allowed to be given, cancel the give
@@ -604,56 +638,74 @@ class CmdGive(NumberedTargetCommand):
                 obj.at_give(caller, target)
 
         if not moved:
-            caller.msg(f"You could not give that to {target.get_display_name(caller)}.")
+            caller.msg(
+                _("You could not give that to {name}.").format(
+                    name=target.get_display_name(caller)
+                )
+            )
         else:
             obj_name = to_give[0].get_numbered_name(len(moved), caller, return_string=True)
-            caller.msg(f"You give {obj_name} to {target.get_display_name(caller)}.")
-            target.msg(f"{caller.get_display_name(target)} gives you {obj_name}.")
+            caller.msg(
+                _("You give {obj_name} to {name}.").format(
+                    obj_name=obj_name, name=target.get_display_name(caller)
+                )
+            )
+            target.msg(
+                _("{name} gives you {obj_name}.").format(
+                    name=caller.get_display_name(target), obj_name=obj_name
+                )
+            )
 
 
 class CmdSetDesc(COMMAND_DEFAULT_CLASS):
-    """
-    describe yourself
-
-    Usage:
-      setdesc <description>
-
-    Add a description to yourself. This
-    will be visible to people when they
-    look at you.
-    """
-
-    key = "setdesc"
+    key = _("setdesc")
     locks = "cmd:all()"
     arg_regex = r"\s|$"
+
+    def get_help(self, caller, cmdset):
+        return _(
+            """
+            describe yourself
+
+            Usage:
+              setdesc <description>
+
+            Add a description to yourself. This
+            will be visible to people when they
+            look at you.
+            """
+        )
 
     def func(self):
         """add the description"""
 
         if not self.args:
-            self.msg("You must add a description.")
+            self.msg(_("You must add a description."))
             return
 
         self.caller.db.desc = self.args.strip()
-        self.msg("You set your description.")
+        self.msg(_("You set your description."))
 
 
 class CmdSay(COMMAND_DEFAULT_CLASS):
-    """
-    speak as your character
-
-    Usage:
-      say <message>
-
-    Talk to those in your current location.
-    """
-
-    key = "say"
-    aliases = ['"', "'"]
+    key = _("say")
+    aliases = translated_list(_('", \''))
     locks = "cmd:all()"
 
     # don't require a space after `say/'/"`
     arg_regex = None
+
+    def get_help(self, caller, cmdset):
+        return _(
+            """
+            speak as your character
+
+            Usage:
+              say <message>
+
+            Talk to those in your current location.
+            """
+        )
 
     def func(self):
         """Run the say command"""
@@ -661,7 +713,7 @@ class CmdSay(COMMAND_DEFAULT_CLASS):
         caller = self.caller
 
         if not self.args:
-            caller.msg("Say what?")
+            caller.msg(_("Say what?"))
             return
 
         speech = self.args
@@ -678,19 +730,22 @@ class CmdSay(COMMAND_DEFAULT_CLASS):
 
 
 class CmdWhisper(COMMAND_DEFAULT_CLASS):
-    """
-    Speak privately as your character to another
-
-    Usage:
-      whisper <character> = <message>
-      whisper <char1>, <char2> = <message>
-
-    Talk privately to one or more characters in your current location, without
-    others in the room being informed.
-    """
-
-    key = "whisper"
+    key = _("whisper")
     locks = "cmd:all()"
+
+    def get_help(self, caller, cmdset):
+        return _(
+            """
+            Speak privately as your character to another
+
+            Usage:
+              whisper <character> = <message>
+              whisper <char1>, <char2> = <message>
+
+            Talk privately to one or more characters in your current location, without
+            others in the room being informed.
+            """
+        )
 
     def func(self):
         """Run the whisper command"""
@@ -698,7 +753,7 @@ class CmdWhisper(COMMAND_DEFAULT_CLASS):
         caller = self.caller
 
         if not self.lhs or not self.rhs:
-            caller.msg("Usage: whisper <character> = <message>")
+            caller.msg(_("Usage: whisper <character> = <message>"))
             return
 
         receivers = [recv.strip() for recv in self.lhs.split(",")]
@@ -720,30 +775,33 @@ class CmdWhisper(COMMAND_DEFAULT_CLASS):
 
 
 class CmdPose(COMMAND_DEFAULT_CLASS):
-    """
-    strike a pose
-
-    Usage:
-      pose <pose text>
-      pose's <pose text>
-
-    Example:
-      pose is standing by the wall, smiling.
-       -> others will see:
-      Tom is standing by the wall, smiling.
-
-    Describe an action being taken. The pose text will
-    automatically begin with your name.
-    """
-
-    key = "pose"
-    aliases = [":", "emote"]
+    key = _("pose")
+    aliases = translated_list(_(":, emote"))
     locks = "cmd:all()"
     arg_regex = ""
 
     # we want to be able to pose without whitespace between
     # the command/alias and the pose (e.g. :pose)
     arg_regex = None
+
+    def get_help(self, caller, cmdset):
+        return _(
+            """
+            strike a pose
+
+            Usage:
+              pose <pose text>
+              pose's <pose text>
+
+            Example:
+              pose is standing by the wall, smiling.
+               -> others will see:
+              Tom is standing by the wall, smiling.
+
+            Describe an action being taken. The pose text will
+            automatically begin with your name.
+            """
+        )
 
     def parse(self):
         """
@@ -761,7 +819,7 @@ class CmdPose(COMMAND_DEFAULT_CLASS):
     def func(self):
         """Hook function"""
         if not self.args:
-            msg = "What do you want to do?"
+            msg = _("What do you want to do?")
             self.msg(msg)
         else:
             msg = f"{self.caller.name}{self.args}"
@@ -769,40 +827,47 @@ class CmdPose(COMMAND_DEFAULT_CLASS):
 
 
 class CmdAccess(COMMAND_DEFAULT_CLASS):
-    """
-    show your current game access
-
-    Usage:
-      access
-
-    This command shows you the permission hierarchy and
-    which permission groups you are a member of.
-    """
-
-    key = "access"
-    aliases = ["groups", "hierarchy"]
+    key = _("access")
+    aliases = translated_list(_("groups, hierarchy"))
     locks = "cmd:all()"
     arg_regex = r"$"
+
+    def get_help(self, caller, cmdset):
+        return _(
+            """
+            show your current game access
+
+            Usage:
+              access
+
+            This command shows you the permission hierarchy and
+            which permission groups you are a member of.
+            """
+        )
 
     def func(self):
         """Load the permission groups"""
 
         caller = self.caller
         hierarchy_full = settings.PERMISSION_HIERARCHY
-        string = "\n|wPermission Hierarchy|n (climbing):\n %s" % ", ".join(hierarchy_full)
+        string = _("\n|wPermission Hierarchy|n (climbing):\n {hierarchy}").format(
+            hierarchy=", ".join(hierarchy_full)
+        )
 
         if caller.account and caller.account.is_superuser:
-            cperms = "<Superuser>"
-            pperms = "<Superuser>"
+            cperms = _("<Superuser>")
+            pperms = _("<Superuser>")
         else:
             cperms = ", ".join(caller.permissions.all())
             if caller.account:
                 pperms = ", ".join(caller.account.permissions.all())
             else:
-                pperms = "<No account>"
+                pperms = _("<No account>")
 
-        string += "\n|wYour access|n:"
-        string += f"\nCharacter |c{caller.key}|n: {cperms}"
+        string += _("\n|wYour access|n:")
+        string += _("\nCharacter |c{key}|n: {cperms}").format(key=caller.key, cperms=cperms)
         if utils.inherits_from(caller, DefaultObject) and caller.account:
-            string += f"\nAccount |c{caller.account.key}|n: {pperms}"
+            string += _("\nAccount |c{key}|n: {pperms}").format(
+                key=caller.account.key, pperms=pperms
+            )
         caller.msg(string)

@@ -1705,6 +1705,10 @@ class DefaultObject(ObjectDB, metaclass=TypeclassBase):
                   -> "Foobert"
         """
         key = kwargs.get("key", self.get_display_name(looker))
+
+        if settings.NO_PLURAL_TRANSFORMATION:
+            return key, key
+
         raw_key = self.name
         key = ansi.ANSIString(key)  # this is needed to allow inflection of colored names
         try:
